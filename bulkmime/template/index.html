@@ -1,0 +1,129 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css" />
+    <title>Private Mailer</title>
+</head>
+<body style="background-color:black">
+    <div class="col-lg-8 col-sm-offset-2">
+<div class="body">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4>Python Mailer</h4>
+            {% if success %}
+            <script>
+                alert('Mail Successfuly sent to "{{receivers}}"');
+            </script>
+            {% endif %}
+        </div>
+        <div class="panel-body">
+
+            <div class="col-sm-8">
+                <button class="btn btn-danger" id="smtp"><i class="glyphicon glyphicon-plus"></i> SMTP & OTHER SETUP</button>
+                <div class="section">
+                    <div class="well" style="margin:auto;width:90%">To get the best experience, you must<br>
+                        <li>1 You must turn ON less secure apps for Gmail (https://www.google.com/settings/security/lesssecureapps)</li>
+                        <li>2. visit this link to unlock captcha https://accounts.google.com/DisplayUnlockCaptcha</li>
+                    </div><br>
+                    <form method="POST" action="" class="form-inline" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="glyphicon glyphicon-send"></i></div>
+                                <input type="text"required class="form-control" id="exampleInputAmount" placeholder="Server e.g smtp.gmail.com" name="smtp_server" style="width:210px">
+                                <div class="input-group-addon"><i class="glyphicon glyphicon-random"></i> Port</div>
+                                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Optional" name="smtp_port" style="width:170px">
+
+                            </div>
+                        </div>
+
+            <hr>
+                </div>
+
+            <div class="" style="padding-right: 7.5px !important;">
+
+              <div style="margin-bottom: 10px" class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+
+                    <input id="sender-name" class="form-control" required name="password" value="" placeholder="Sender Password" type="password">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+
+                    <input id="sender-email" class="form-control kanan-l" required name="sender_email" value="" placeholder="Sender Email" type="text">
+                  </div>
+
+              <div style="margin-bottom: 10px" class="input-group">
+
+
+                  </div>
+{{last_file}}
+              <div style="margin-bottom: 5px" class="input-group">
+                    <select class="form-control" name="encode" style="width:260px">
+                      <option value="" selected="">Select Encoding</option>
+                      <option value="base64">base64</option>
+                      <option value="7bit">7bit</option>
+                      <option value="8bit">8bit</option>
+                      <option value="binary">binary</option>
+                      <option value="quoted-printable">quoted-printable</option>
+                    </select>
+
+                    {{form.as_p}}<br>
+                    Check the box to use the last file uploaded <a href="{{recent_files.file.url}}">{{recent_file.file}}</a>
+                    &nbsp;&nbsp;<input type="checkbox" name="yes" value="yes">
+
+                  </div><br>
+<input id="subject" required class="form-control kanan-l" name="subject" value="" placeholder="Email Subject" type="text"><br>
+              <div style="margin-bottom: 10px" class="input-group">
+
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                    <textarea class="form-control" required rows="10" name="message" placeholder="Message"></textarea>
+                  </div>
+
+            </div>
+        </div>
+        <div class="col-sm-4" style="padding-left: 7.5px !important;">
+            <div style="padding-left: 7.5px !important;">
+              <div style="margin-bottom: 10px" class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i><b> Content Type</b></span>
+                    <select class="form-control" name="type">
+                      <option value="html">text/html</option>
+                      <option value="plain">text/plain</option>
+                    </select>
+                  </div>
+
+            </div>
+              <div style="margin-bottom: 10px" class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i><b> Encode Headers</b></span>
+                    <select class="form-control" name="encoding">
+                      <option value="yes">yes</option>
+                      <option value="no">no</option>
+                    </select>
+                  </div>
+
+              <div style="margin-bottom: 10px" class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                    <textarea class="form-control" required rows="18" name="receiver_emails" placeholder="Email List Use comma to seperate mails"></textarea>
+                  </div>
+
+            </div>
+            <div style="margin-bottom: 10px" class="input-group">
+                    <input class="btn btn-success" name="action" value="Start Spam" type="submit">
+                  </div>
+</div>
+</div></div>
+<script type="text/javascript" src="{% static 'jquery.js' %}"></script>
+<script type="text/javascript">
+(function(){
+    $('.section').hide();
+    var elem = document.getElementById('smtp');
+    $(elem).on('click', function(){
+        $('.section').show();
+        });
+
+})();
+</script>
+</body>
+</html>
